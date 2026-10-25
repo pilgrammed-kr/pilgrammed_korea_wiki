@@ -1,5 +1,7 @@
 name: Deploy pilgrammed_korea_wiki (manual)
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
@@ -34,7 +36,7 @@ jobs:
       - name: Prepare upload
         run: |
           mkdir -p _site
-          cp -a index.html items copyright.html robots.txt sitemap.xml .nojekyll google*.html _site/
+          cp -a index.html assets sw.js manifest.webmanifest items copyright.html robots.txt sitemap.xml .nojekyll google*.html _site/
       - uses: actions/upload-pages-artifact@v4
         with:
           path: _site
