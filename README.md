@@ -1,4 +1,4 @@
-# pilgrammed_korea_wiki V2.5.0 — 공개 전 최종 후보
+# Pilgrammed Korea Wiki V2.5.1 — 공개 전 최종 후보
 
 **주의: 현재까지 저작권 원문 전수 대조·정확도 검증은 끝나지 않았습니다. 최종 공개 전 검토가 필요합니다.**
 
@@ -23,3 +23,8 @@
 
 ## 검증 명령
 `python verify_site.py` 로 상대경로 링크 검사, `python qa_release.py` 로 파일/메타/스크립트/배포 워크플로 검사. 실제 URL을 확정한 뒤 `python make_sitemap.py https://YOUR-PAGES-URL/` 실행하고 `python verify_site.py --production`으로 검사하세요.
+
+## V2.5.1 표시 수정
+- 사이트 상단, 사이드바, 홈 제목과 브라우저 제목의 이름·버전을 통일했습니다.
+- 아이템별 페이지 677개 및 저작권 안내의 사이트명도 변경했습니다.
+- 게임 수치와 출처 내용은 수정하지 않았습니다. 기존 저작권 원문 대조는 별도로 필요합니다.
