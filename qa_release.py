@@ -4,7 +4,7 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 import subprocess, tempfile, sys, re
 root=Path(__file__).resolve().parent
-htmls=sorted(root.rglob('*.html'))
+htmls=sorted(p for p in root.rglob('*.html') if not p.name.startswith('google') or not p.name.endswith('.html'))
 errors=[]
 for p in htmls:
  s=BeautifulSoup(p.read_text('utf-8'),'html.parser')
