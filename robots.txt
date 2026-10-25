@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+# 배포 도메인 확정 후 sitemap.xml 생성 및 Sitemap 항목 설정
