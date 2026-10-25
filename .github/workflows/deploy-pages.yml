@@ -34,7 +34,7 @@ jobs:
       - name: Prepare upload
         run: |
           mkdir -p _site
-          cp -a index.html items copyright.html robots.txt sitemap.xml .nojekyll _site/
+          cp -a index.html items copyright.html robots.txt sitemap.xml .nojekyll google*.html _site/
       - uses: actions/upload-pages-artifact@v4
         with:
           path: _site
