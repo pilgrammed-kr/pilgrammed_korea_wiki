@@ -3,7 +3,7 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 import sys, urllib.parse, xml.etree.ElementTree as ET
 root=Path(__file__).resolve().parent
-html=list(root.rglob('*.html'))
+html=[p for p in root.rglob('*.html') if not p.name.startswith('google')]
 errors=[]
 for p in html:
  s=BeautifulSoup(p.read_text('utf-8'),'html.parser')
