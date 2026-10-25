@@ -19,7 +19,10 @@ for p in htmls:
    f.write(code);f.flush()
    r=subprocess.run(['node','--check',f.name],capture_output=True,text=True)
    if r.returncode:errors.append(f'{p.relative_to(root)}: JS syntax: {r.stderr[:150]}')
- if p==root/'index.html' and 'V2.6.0' not in p.read_text('utf-8'):errors.append('old version in main')
+ if p==root/'index.html' and 'V2.6.1' not in p.read_text('utf-8'):errors.append('old version in main')
+for p in (root/'assets').rglob('*.js'):
+ r=subprocess.run(['node','--check',str(p)],capture_output=True,text=True)
+ if r.returncode:errors.append(f'{p.relative_to(root)}: JS syntax: {r.stderr[:150]}')
 print('HTML files:',len(htmls))
 print('JavaScript syntax and basic metadata checks:', 'PASS' if not errors else 'FAIL')
 for err in errors[:20]:print('ERROR',err)

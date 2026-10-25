@@ -7,8 +7,8 @@ html=[p for p in root.rglob('*.html') if not p.name.startswith('google')]
 errors=[]
 for p in html:
  s=BeautifulSoup(p.read_text('utf-8'),'html.parser')
- for a in s.select('a[href]'):
-  u=a.get('href','').strip()
+ for a in s.select('a[href],link[href],script[src],img[src]'):
+  u=(a.get('href') or a.get('src') or '').strip()
   if not u or u.startswith(('#','mailto:','tel:','javascript:','data:')): continue
   q=urllib.parse.urlsplit(u)
   if q.scheme or q.netloc: continue
