@@ -1,7 +1,7 @@
 'use strict';
-const PREFIX='pilgrammed-wiki-'+new URL(self.registration.scope).pathname+'-',CACHE=PREFIX+'2.6.2';
-const ASSETS=['./','index.html','assets/studio.css?v=2.6.2','assets/studio-core.js?v=2.6.2','assets/studio.js?v=2.6.2','assets/expedition-core.js?v=2.6.2','assets/expedition.js?v=2.6.2','assets/expedition-worker.js?v=2.6.2','assets/offline.js?v=2.6.2','manifest.webmanifest','assets/icon.svg','assets/icon-192.png','assets/icon-512.png'];
-self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS))));
+const PREFIX='pilgrammed-wiki-'+new URL(self.registration.scope).pathname+'-',CACHE=PREFIX+'3.0.0';
+const ASSETS=['./','index.html','manifest.webmanifest','assets/icon-192.png','assets/icon-512.png'];
+self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil((async()=>{for(const key of await caches.keys())if(key.startsWith(PREFIX)&&key!==CACHE)await caches.delete(key);await self.clients.claim()})()));
 self.addEventListener('message',event=>{if(event.data?.type==='ACTIVATE_UPDATE')self.skipWaiting()});
 self.addEventListener('fetch',event=>{const req=event.request,url=new URL(req.url);if(req.method!=='GET'||url.origin!==self.location.origin||!url.href.startsWith(self.registration.scope)||/\/google[^/]*\.html$/.test(url.pathname))return;

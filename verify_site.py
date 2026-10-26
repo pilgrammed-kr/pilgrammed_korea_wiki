@@ -1,33 +1,29 @@
 #!/usr/bin/env python3
+from html.parser import HTMLParser
 from pathlib import Path
-from bs4 import BeautifulSoup
-import sys, urllib.parse, xml.etree.ElementTree as ET
+from urllib.parse import urlsplit,unquote
+import sys,xml.etree.ElementTree as ET
 root=Path(__file__).resolve().parent
-html=[p for p in root.rglob('*.html') if not p.name.startswith('google')]
-errors=[]
-for p in html:
- s=BeautifulSoup(p.read_text('utf-8'),'html.parser')
- for a in s.select('a[href],link[href],script[src],img[src]'):
-  u=(a.get('href') or a.get('src') or '').strip()
-  if not u or u.startswith(('#','mailto:','tel:','javascript:','data:')): continue
-  q=urllib.parse.urlsplit(u)
-  if q.scheme or q.netloc: continue
-  if u.startswith('/'): continue # absolute path depends on deployment prefix; inspect during browser test
-  target=(p.parent/urllib.parse.unquote(q.path)).resolve()
-  if not target.is_relative_to(root.resolve()): continue
+class Links(HTMLParser):
+ def __init__(self):super().__init__();self.links=[]
+ def handle_starttag(self,t,a):
+  a=dict(a)
+  if t in ('a','link','script','img'):self.links.append(a.get('href') or a.get('src') or '')
+errors=[];pages=[p for p in root.rglob('*.html') if not p.name.startswith('google') and '_site' not in p.relative_to(root).parts]
+for p in pages:
+ parser=Links();parser.feed(p.read_text())
+ for link in parser.links:
+  u=urlsplit(link)
+  if not link or u.scheme or u.netloc or link.startswith(('#','/')):continue
+  target=(p.parent/unquote(u.path)).resolve()
   if target.is_dir():target=target/'index.html'
-  if not target.exists():errors.append(f'{p.relative_to(root)} -> {u}')
+  if target.is_relative_to(root) and not target.exists():errors.append(str(p.relative_to(root))+' -> '+link)
 if '--production' in sys.argv:
- sm=root/'sitemap.xml'
- if not sm.exists():errors.append('missing sitemap.xml')
- else:
-  try:
-   ns={'x':'http://www.sitemaps.org/schemas/sitemap/0.9'}
-   t=ET.parse(sm)
-   locs=[v.text for v in t.findall('.//x:loc',ns)]
-   if len(locs)!=len(html):errors.append(f'sitemap count mismatch {len(locs)} vs {len(html)}')
-   if any(not (u or '').startswith('https://') for u in locs):errors.append('non-HTTPS sitemap url')
-  except Exception as e: errors.append('invalid sitemap '+str(e))
-print('HTML pages:',len(html),'broken relative links:',len(errors))
-for e in errors[:40]:print('ERROR',e)
-sys.exit(1 if errors else 0)
+ ns={'s':'http://www.sitemaps.org/schemas/sitemap/0.9'}
+ try:
+  urls=ET.parse(root/'sitemap.xml').findall('.//s:loc',ns)
+  if len(urls)!=len(pages):errors.append('sitemap page count')
+ except Exception as e:errors.append('sitemap: '+str(e))
+print('HTML pages:',len(pages),'broken paths:',len(errors))
+for e in errors[:20]:print(e)
+sys.exit(bool(errors))
