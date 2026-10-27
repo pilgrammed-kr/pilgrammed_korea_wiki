@@ -30,7 +30,10 @@ jobs:
       - name: Local link and sitemap checks
         run: python verify_site.py --production
       - name: Guide release checks
-        run: python tests/test_v310.py
+        run: |
+          python tests/test_v310.py
+          python tests/test_v311.py
+          node tests/document-records.test.cjs
       - name: Offline HTML and JavaScript checks
         run: python qa_release.py
       - name: Prepare upload
