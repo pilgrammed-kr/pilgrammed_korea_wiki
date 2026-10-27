@@ -42,7 +42,7 @@ class Release(unittest.TestCase):
   s,_=parse('bosses/purple-shark.html');self.assertIn('영혼 조각 ×',s)
   s,_=parse('bosses/thief-king.html');self.assertIn('영혼 ×',s)
  def test_home_and_metadata(self):
-  s,p=parse('index.html');self.assertIn('guides/wayfinder.html',p.links)
+  s,p=parse('index.html');self.assertIn('encyclopedia/index.html',p.links)
   self.assertIn('개별 주소로 문서 열기',s)
   self.assertNotRegex(re.search(r'<title>(.*?)</title>',s,re.S)[1],r'V?3\.[01]\.')
   self.assertIn('필그램드 한국어 위키',re.search(r'<title>(.*?)</title>',s,re.S)[1])
