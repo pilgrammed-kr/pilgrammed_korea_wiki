@@ -1,5 +1,5 @@
 'use strict';
-const PREFIX='pilgrammed-wiki-'+new URL(self.registration.scope).pathname+'-',CACHE=PREFIX+'3.1.1';
+const PREFIX='pilgrammed-wiki-'+new URL(self.registration.scope).pathname+'-',CACHE=PREFIX+'3.1.2';
 const ASSETS=['./','index.html','manifest.webmanifest','assets/icon-192.png','assets/icon-512.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil((async()=>{for(const key of await caches.keys())if(key.startsWith(PREFIX)&&key!==CACHE)await caches.delete(key);await self.clients.claim()})()));

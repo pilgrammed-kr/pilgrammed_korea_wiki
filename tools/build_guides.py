@@ -109,34 +109,17 @@ def evidence(x,extra=None):
  body='<p>자료 기준: '+E(date or '항목별 원문 참고')+' · 기존 위키 자료를 재구성했습니다. 이번 개편에서 게임 내 이동·수치를 새로 검증한 것은 아닙니다.</p>'
  body+=para(x.get('official_verification_note')or x.get('recipe_note')or '')
  body+='<ul>'+''.join('<li><a href="'+E(u)+'" rel="noopener noreferrer">'+E(unescape(urlsplit(u).path.rsplit('/',1)[-1]).replace('_',' '))+' 원문 ↗</a></li>'for u in sources)+'</ul>'
- return '<details class="sources"><summary>출처와 확인 범위</summary>'+body+'</details>'
-CSS='''*{box-sizing:border-box}body{margin:0;background:#10151e;color:#e8ecf3;font:16px/1.8 system-ui,-apple-system,"Noto Sans KR",sans-serif}a{color:#a9d2ff;text-underline-offset:4px}a:hover{color:#fff}a:focus-visible,input:focus-visible{outline:3px solid #dfbd77;outline-offset:3px}header,main,footer{width:min(100% - 40px,960px);margin:auto}header{padding:25px 0;border-bottom:1px solid #344153}header>a{font-weight:700;text-decoration:none}nav{display:flex;flex-wrap:wrap;gap:10px 22px;font-size:14px;margin-top:12px}main{padding:32px 0 64px}h1{font-size:clamp(26px,5vw,42px);line-height:1.3;margin:14px 0 20px;overflow-wrap:anywhere}h2{font-size:23px;line-height:1.4;margin:0 0 18px}h3{font-size:18px}section{margin:35px 0;padding-top:24px;border-top:1px solid #344153}p,li,td{overflow-wrap:anywhere}li{margin:7px 0}ul,ol{padding-left:24px}.eyebrow,.muted,footer{color:#a6b5c8;font-size:13px}.lead{font-size:18px;color:#c7d6e8;max-width:760px}.note{background:#1c2a3d;border-left:3px solid #a5c7f1;padding:15px 18px;border-radius:0 9px 9px 0}.cards{padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.cards li{margin:0}.cards a{display:block;background:#182230;border:1px solid #344153;border-radius:9px;padding:13px 16px;text-decoration:none;height:100%}.tableWrap{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:12px;border-bottom:1px solid #344153;text-align:left;vertical-align:top}th{width:32%;color:#bacce1}input{width:100%;padding:14px;background:#182230;border:1px solid #566b85;border-radius:8px;color:#fff;font:inherit}.docBar{display:flex;justify-content:space-between;gap:16px;padding:18px 0}.docBar .siteName{font-size:12px;color:#98abc2;font-weight:400}.articleNav{display:flex;flex-wrap:wrap;gap:8px 18px;padding:14px 0;border-block:1px solid #344153;margin:25px 0;font-size:13px}.recordBar{margin:28px 0;display:flex;flex-wrap:wrap;gap:10px}.recordBar button{font:inherit;font-size:13px;color:#c6dcf7;border:1px solid #344153;background:#182230;border-radius:7px;padding:9px 14px;cursor:pointer}.recordStatus{font-size:12px;color:#a6b5c8}main>h1{font-weight:650}html[data-theme=light] body{background:#f1f4f8;color:#25354a}html[data-theme=light] a{color:#285b91}html[data-theme=light] .lead,html[data-theme=light] .sources{color:#4b6079}html[data-theme=light] .cards a,html[data-theme=light] input,html[data-theme=light] .recordBar button{background:#fff;color:#25354a}html[data-theme=light] .note{background:#e2ebf5;color:#25354a}.sources{margin:30px 0;border-top:1px solid #344153;padding-top:18px;font-size:13px;color:#a6b5c8}.sources summary{cursor:pointer;color:#c7d6e8;font-size:15px}.sources[open] summary{margin-bottom:16px}.categoryGroup{border:1px solid #344153;border-radius:10px;padding:16px 20px;margin:12px 0}.categoryGroup summary{cursor:pointer;font-size:18px;font-weight:650}.categoryGroup .cards{margin-top:18px}.backLink{font-size:13px;margin:0 0 14px}.badge.heart{background:#493e25;color:#f4d995}.badge{display:inline-block;padding:3px 10px;background:#243c57;border-radius:5px;color:#c2e2ff;font-size:14px}footer{padding:25px 0;border-top:1px solid #344153}@media(max-width:600px){body{font-size:15px}.cards{grid-template-columns:1fr}header,main,footer{width:calc(100% - 32px)}th,td{padding:9px}nav{gap:8px 16px}}'''
+ return section('출처와 확인 범위',body)
+CSS='''*{box-sizing:border-box}body{margin:0;background:#10151e;color:#e8ecf3;font:16px/1.8 system-ui,-apple-system,"Noto Sans KR",sans-serif}a{color:#a9d2ff;text-underline-offset:4px}a:hover{color:#fff}a:focus-visible,input:focus-visible{outline:3px solid #dfbd77;outline-offset:3px}header,main,footer{width:min(100% - 40px,960px);margin:auto}header{padding:25px 0;border-bottom:1px solid #344153}header>a{font-weight:700;text-decoration:none}nav{display:flex;flex-wrap:wrap;gap:10px 22px;font-size:14px;margin-top:12px}main{padding:32px 0 64px}h1{font-size:clamp(26px,5vw,42px);line-height:1.3;margin:14px 0 20px;overflow-wrap:anywhere}h2{font-size:23px;line-height:1.4;margin:0 0 18px}h3{font-size:18px}section{margin:35px 0;padding-top:24px;border-top:1px solid #344153}p,li,td{overflow-wrap:anywhere}li{margin:7px 0}ul,ol{padding-left:24px}.eyebrow,.muted,footer{color:#a6b5c8;font-size:13px}.lead{font-size:18px;color:#c7d6e8;max-width:760px}.note{background:#1c2a3d;border-left:3px solid #a5c7f1;padding:15px 18px;border-radius:0 9px 9px 0}.cards{padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.cards li{margin:0}.cards a{display:block;background:#182230;border:1px solid #344153;border-radius:9px;padding:13px 16px;text-decoration:none;height:100%}.tableWrap{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:12px;border-bottom:1px solid #344153;text-align:left;vertical-align:top}th{width:32%;color:#bacce1}input{width:100%;padding:14px;background:#182230;border:1px solid #566b85;border-radius:8px;color:#fff;font:inherit}.badge.heart{background:#493e25;color:#f4d995}.badge{display:inline-block;padding:3px 10px;background:#243c57;border-radius:5px;color:#c2e2ff;font-size:14px}footer{padding:25px 0;border-top:1px solid #344153}@media(max-width:600px){body{font-size:15px}.cards{grid-template-columns:1fr}header,main,footer{width:calc(100% - 32px)}th,td{padding:9px}nav{gap:8px 16px}}'''
 (ROOT/'assets/guide.css').write_text(CSS)
-NAV=[('encyclopedia','전체 문서'),('guides','공략')]
-LABELS={**dict(NAV),'items':'아이템','bosses':'보스','regions':'지역','quests':'퀘스트','npcs':'NPC','techniques':'테크닉','removed':'삭제된 아이템','unobtainable':'획득 불가 아이템','arrows':'화살 유형','mobs':'일반 몬스터','guilds':'길드','mirrors':'거울','achievements':'업적','skills':'스킬','upgrades':'어빌리티','status':'상태 효과','alchemy':'연금술 재료','fishing':'낚시 도구·미끼','mechanics':'게임 시스템'}
-DOCUMENT_LABELS={routes[k,x['name']]:label(x)for k,rows in groups.items()for x in rows}
-ORIGINAL_REGIONS={n for x in bosses+D['b3Data']['mobs']for n in re.split(r',\s*',x.get('area',''))if n}
-DOCUMENT_RECORDS={p:{'id':('tech'if k=='techniques'else'locations'if k=='regions'else k)+'|'+n,'kind':k,'name':n}for(k,n),p in routes.items()if k!='regions' or n in ORIGINAL_REGIONS}
+NAV=[('encyclopedia','전체 문서'),('guides','한국어 공략'),('items','아이템'),('bosses','보스'),('regions','지역'),('quests','퀘스트'),('npcs','NPC'),('techniques','테크닉')]
+LABELS={**dict(NAV),'removed':'삭제된 아이템','unobtainable':'획득 불가 아이템','arrows':'화살 유형','mobs':'일반 몬스터','guilds':'길드','mirrors':'거울','achievements':'업적','skills':'스킬','upgrades':'어빌리티','status':'상태 효과','alchemy':'연금술 재료','fishing':'낚시 도구·미끼','mechanics':'게임 시스템'}
 written=[]
 def page(path,title,desc,body,kind='공략',search=False):
- url=BASE+quote(path,safe='/'); links=''
+ url=BASE+quote(path,safe='/'); links=''.join('<a href="../'+k+'/index.html">'+v+'</a>'for k,v in NAV)
  script='''<script>const q=document.getElementById('filter');q?.addEventListener('input',()=>{const t=q.value.toLocaleLowerCase();document.querySelectorAll('.cards li').forEach(x=>x.hidden=!x.textContent.toLocaleLowerCase().includes(t))});</script>'''if search else ''
- record=DOCUMENT_RECORDS.get(path)
- record_bar=''
- if record:
-  action='획득 체크'if record['kind']=='items'else'완료 표시'
-  record_bar='<div class="recordBar" data-record=\''+E(json.dumps(record,ensure_ascii=False))+'\'><button type="button" data-record-action="favorite">즐겨찾기</button><button type="button" data-record-action="mark">'+action+'</button></div><p class="recordStatus" aria-live="polite"></p>'
-  script+='<script src="../assets/document-records.js?v=3.1.1" defer></script>'
- # Only document sections get compact local anchors; lists remain as simple directories.
- if record:
-  count=[0];toc=[]
-  def headings(match):
-   count[0]+=1;ident='section-'+str(count[0]);toc.append((ident,match[1]));return '<h2 id="'+ident+'">'+match[1]+'</h2>'
-  body=re.sub(r'<h2>(.*?)</h2>',headings,body)
-  quick=toc[:4]
-  if len(quick)>1:body='<nav class="articleNav" aria-label="문서 내용">'+''.join('<a href="#'+ident+'">'+title+'</a>'for ident,title in quick)+'</nav>'+body
- data={'@context' :'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'필그램드 한국어 위키','item':BASE},{'@type':'ListItem','position':2,'name':title,'item':url}]}
- html='<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+E(title)+' | 필그램드 한국어 위키</title><meta name="description" content="'+E(desc)+'"><link rel="canonical" href="'+E(url)+'"><meta property="og:title" content="'+E(title)+' | 필그램드 한국어 위키"><meta property="og:description" content="'+E(desc)+'"><meta property="og:type" content="article"><meta property="og:url" content="'+E(url)+'"><link rel="stylesheet" href="../assets/guide.css?v=3.1.1"><script type="application/ld+json">'+json.dumps(data,ensure_ascii=False).replace('</','<\\/')+'</script></head><body><header class="docBar"><a href="'+('index.html'if not path.endswith('/index.html')else'../index.html')+'">← '+('목록'if not path.endswith('/index.html')else'홈')+'</a><a class="siteName" href="../index.html">필그램드 한국어 위키</a></header><main><p class="eyebrow">PILGRAMMED / '+E(kind)+'</p><h1>'+E(DOCUMENT_LABELS.get(path,title))+'</h1><p class="lead">'+E(desc)+'</p>'+body+record_bar+'</main><footer>비공식 팬 위키 · 게임 업데이트에 따라 정보가 달라질 수 있습니다. <a href="../copyright.html">출처·이용 안내</a> · 문서 구조 V3.1.1</footer>'+script+'</body></html>'
+ data={'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'필그램드 한국어 위키','item':BASE},{'@type':'ListItem','position':2,'name':title,'item':url}]}
+ html='<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+E(title)+' | 필그램드 한국어 위키</title><meta name="description" content="'+E(desc)+'"><link rel="canonical" href="'+E(url)+'"><meta property="og:title" content="'+E(title)+' | 필그램드 한국어 위키"><meta property="og:description" content="'+E(desc)+'"><meta property="og:type" content="article"><meta property="og:url" content="'+E(url)+'"><link rel="stylesheet" href="../assets/guide.css"><script type="application/ld+json">'+json.dumps(data,ensure_ascii=False).replace('</','<\\/')+'</script></head><body><header><a href="../index.html">필그램드 한국어 위키</a><nav aria-label="분야별 문서">'+links+'</nav></header><main><p class="eyebrow">PILGRAMMED / '+E(kind)+'</p><h1>'+E(title)+'</h1><p class="lead">'+E(desc)+'</p>'+body+'</main><footer>비공식 팬 위키 · 게임 업데이트에 따라 정보가 달라질 수 있습니다. <a href="../copyright.html">출처·이용 안내</a> · 문서 구조 V3.1.0</footer>'+script+'</body></html>'
  p=ROOT/path;p.parent.mkdir(parents=True,exist_ok=True);p.write_text(html);written.append(path)
 # Item URLs remain exactly the same. New static layout adds bidirectional links.
 for item_kind in ['items','removed','unobtainable','arrows']:
@@ -228,35 +211,29 @@ guides=[
  ('souls','필그램드 영혼·영혼 조각 보스 목록','보스가 주는 영혼과 영혼 조각을 구분하고 위치·공략으로 이동하세요.',section('영혼 보스',cards('bosses',[x for x in bosses if D['souls417Data'].get('bosses',{}).get(x['name'],{}).get('kind')=='heart']))+section('영혼 조각 보스',cards('bosses',[x for x in bosses if D['souls417Data'].get('bosses',{}).get(x['name'],{}).get('kind')=='fragment']))+'<p>보상 종류가 기록되지 않은 보스는 이 목록에서 제외했습니다.</p>'),
  ('old-fart','올드 파트(Old Fart) 위치·봉인 해제 안내','기존 자료의 선행 조건, 봉인 위치와 보스 공략을 확인하세요.',section('선행 조건과 이동 순서',cards('bosses',[x for x in bosses if x['name']in ['Old Fart','Highway Son']]))+section('관련 장비와 NPC',cards('items',[x for x in items if x['name']=='Gemstone Pickaxe'])+cards('npcs',[x for x in npcs if x['name']=='Ploma'])))
 ]
-from guide_content import enhanced_guides
-guides=enhanced_guides(D,guides,section,para,listing,table,cards,evidence)
 for key,title,desc,body in guides:
- if False and key=='beginner':
+ if key=='beginner':
   body+=section('권장 확인 순서',listing(['First Impressions의 안내에 따라 Vermeil Village의 Abraska를 찾아가세요.','Thief Trouble에서 도둑 처치와 보스 처치 목표를 확인하세요.','채광 도구가 필요하면 Vergil의 Mr Smith에서 재료와 보상을 확인하세요.'],True))
  if key=='elite-guard':
   entry=next((x for x in tech if x['name']=='Elite Guard'),None)
   if entry:body+=section('어디서 어떻게 받나요?',para(entry.get('place'))+para(entry.get('require')))+section('사용 조건과 효과',para(entry.get('compat'))+para(entry.get('desc')))+evidence(entry)
- if key=='old-fart':
+ if key in ['old-fart','junk-pits']:
   entry=next(x for x in bosses if x['name']==('Old Fart'if key=='old-fart'else'Cata'));g=entry.get('location_guide',{})
   body+=section('기존 자료의 이동 안내',para(g.get('start'))+listing(g.get('requirements',[]))+listing(g.get('steps',[]),True)+para(g.get('review_note')))+evidence(entry)
  if key=='wayfinder':body+=evidence(next(x for x in items if x['name']=='Wayfinder'))
  page('guides/'+key+'.html',title,desc,body,'한국어 공략')
-links='<ul class="cards">'+''.join('<li><a href="'+k+'.html">'+E(t)+'</a></li>'for k,t,_,_ in guides if k not in ['wayfinder','elite-guard'])+'</ul>'
+links='<ul class="cards">'+''.join('<li><a href="'+k+'.html">'+E(t)+'</a></li>'for k,t,_,_ in guides)+'</ul>'
 page('guides/index.html','필그램드 한국어 공략 모음','초보자 진행, 장비 제작, 테크닉 획득과 보스 위치를 주제별로 찾아보세요.',links+section('전체 분야','<nav>'+''.join('<a href="../'+k+'/index.html">'+v+'</a>'for k,v in NAV if k!='guides')+'</nav>'),'공략 목차')
 for kind,rows in groups.items():
  title=LABELS[kind]+' 도감·목차'
  page(kind+'/index.html',title,'필그램드 '+LABELS[kind]+' 문서를 이름으로 찾고 각 항목의 상세 안내를 확인하세요.','<label for="filter">이름 검색</label><input id="filter" type="search" placeholder="한글·영문 이름 입력">'+cards(kind,rows),'분야별 목차',True)
-CATEGORY_GROUPS=[('장비와 아이템',['items','arrows','removed','unobtainable']),('몬스터와 지역',['bosses','mobs','regions']),('퀘스트와 탐험',['quests','npcs','guilds','mirrors','achievements']),('스킬과 성장',['skills','techniques','upgrades']),('생활과 시스템',['fishing','alchemy','status','mechanics'])]
-category_html=''.join('<details class="categoryGroup"><summary>'+E(title)+'</summary><ul class="cards">'+''.join('<li><a href="../'+k+'/index.html">'+E(LABELS[k])+' · '+str(len(groups[k]))+'개</a></li>'for k in keys)+'</ul></details>'for title,keys in CATEGORY_GROUPS)
-page('encyclopedia/index.html','전체 문서 목차','분류를 펼쳐 필요한 도감을 선택하세요.',category_html,'전체 문서')
-
+page('encyclopedia/index.html','필그램드 전체 문서 목차','아이템부터 몬스터, 스킬과 생활 시스템까지 모든 도감 항목을 개별 주소로 확인하세요.','<ul class="cards">'+''.join('<li><a href="../'+k+'/index.html">'+E(LABELS[k])+' · '+str(len(rows))+'개</a></li>'for k,rows in groups.items())+'</ul>','전체 문서')
 # Add the same useful links to the rendered home and its initial HTML, once.
-hub='<nav class="cleanAllLink"><a href="encyclopedia/index.html">전체 문서 목차</a> · <a href="guides/index.html">공략 모음</a></nav>'
-
+hub='<section class="searchGuideHub" aria-label="한국어 공략"><h2>한국어 공략과 획득처</h2><p>장비 제작, 보스 위치와 퀘스트를 개별 문서로 확인하세요.</p><nav>'+''.join('<a href="guides/'+k+'.html">'+E(t)+'</a>'for k,t,_,_ in guides)+'</nav><nav>'+''.join('<a href="'+k+'/index.html">'+v+' 전체 보기</a>'for k,v in NAV)+'</nav></section>'
 source=re.sub(r'<!-- V310_HOME_START -->.*?<!-- V310_HOME_END -->','',source,flags=re.S)
 source=re.sub(r'/\* V310_CSS_START \*/.*?/\* V310_CSS_END \*/','',source,flags=re.S)
-source=source.replace('V3.1.0','V3.1.1')
-# Home navigation is maintained by homeView; no duplicate shortcut block.
+source=source.replace('V3.0.0','V3.1.0')
+source=source.replace('</section><div class="homeColumns">','</section><!-- V310_HOME_START -->'+hub+'<!-- V310_HOME_END --><div class="homeColumns">',1)
 source=re.sub(r'(<main\b[^>]*\bid="content"[^>]*>).*?(</main>)',lambda m:m[1]+'<h1>필그램드 한국어 위키</h1><p>로블록스 필그램드(Pilgrammed)의 장비 획득처, 보스 공략, 퀘스트를 한국어로 정리한 비공식 팬 위키입니다.</p>'+hub+m[2],source,count=1,flags=re.S)
 source=source.replace('</style>','/* V310_CSS_START */.searchGuideHub{margin:0 0 32px;padding:22px;background:var(--panel);border:1px solid var(--line);border-radius:12px}.searchGuideHub h2{margin-bottom:8px}.searchGuideHub p{color:var(--muted);font-size:12px}.searchGuideHub nav{display:flex;flex-wrap:wrap;gap:10px 20px;margin:14px 0}.searchGuideHub a{font-size:13px}/* V310_CSS_END */</style>',1)
 title='필그램드 한국어 위키 | Pilgrammed 비공식 팬 위키'
@@ -277,3 +254,6 @@ if anchor not in source:source=source.replace('</header><div class="docColumns">
 (ROOT/'index.html').write_text(source)
 (ROOT/'assets/guide-routes.json').write_text(json.dumps([{'kind':k,'name':n,'path':p}for(k,n),p in routes.items()],ensure_ascii=False))
 print('정적 문서 생성:',len(written),'개; 보스',len(bosses),'퀘스트',len(quests),'지역',len(regions),'NPC',len(npcs),'테크닉',len(tech))
+
+import subprocess
+subprocess.run([sys.executable,str(ROOT/"tools/refine_v312.py")],check=True)

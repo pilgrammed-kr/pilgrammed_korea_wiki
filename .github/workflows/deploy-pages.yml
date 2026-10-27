@@ -21,6 +21,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
       - uses: actions/configure-pages@v5
         id: pages
       - name: Build sitemap and canonical for actual Pages URL
@@ -30,10 +33,7 @@ jobs:
       - name: Local link and sitemap checks
         run: python verify_site.py --production
       - name: Guide release checks
-        run: |
-          python tests/test_v310.py
-          python tests/test_v311.py
-          node tests/document-records.test.cjs
+        run: python tests/test_v312.py
       - name: Offline HTML and JavaScript checks
         run: python qa_release.py
       - name: Prepare upload
