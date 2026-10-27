@@ -23,20 +23,20 @@ jobs:
           python-version: '3.12'
       - uses: actions/configure-pages@v5
         id: pages
-      - name: Install generator dependency
-        run: python -m pip install beautifulsoup4
       - name: Build sitemap and canonical for actual Pages URL
         env:
           PAGES_URL: ${{ steps.pages.outputs.base_url }}
         run: python make_sitemap.py "$PAGES_URL"
       - name: Local link and sitemap checks
         run: python verify_site.py --production
+      - name: Guide release checks
+        run: python tests/test_v310.py
       - name: Offline HTML and JavaScript checks
         run: python qa_release.py
       - name: Prepare upload
         run: |
           mkdir -p _site
-          cp -a index.html assets sw.js manifest.webmanifest items copyright.html robots.txt sitemap.xml .nojekyll google*.html _site/
+          cp -a index.html assets sw.js manifest.webmanifest items bosses quests regions npcs techniques guides encyclopedia removed unobtainable arrows mobs guilds mirrors achievements skills upgrades status alchemy fishing mechanics copyright.html robots.txt sitemap.xml .nojekyll google*.html _site/
       - uses: actions/upload-pages-artifact@v4
         with:
           path: _site
